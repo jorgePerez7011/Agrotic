@@ -1,3 +1,6 @@
+# Environment
+.env
+.env.*.local
 /storage/fonts/*
 !/storage/fonts/.keep
 /.phpunit.cache
