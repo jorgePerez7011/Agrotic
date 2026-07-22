@@ -85,8 +85,6 @@ class OrderController extends Controller
             $order->save();
 
             // Generate bill (PDF).
-            $pdfName = 'uploads/bills/bill_' . $order->id . '_' . Carbon::now()->format('YmdHis') . '.pdf';
-
             $order = Order::find($order->id);
             $client = Client::where("id", $order->client_id)->first();
             $details = OrderDetail::with('product')
@@ -97,9 +95,19 @@ class OrderController extends Controller
                 ->setPaper('letter')
                 ->output();
 
-            file_put_contents($pdfName, $pdf);
+            // Ensure uploads/bills directory exists in public
+            $dir = public_path('uploads/bills');
+            if (!file_exists($dir)) {
+                mkdir($dir, 0755, true);
+            }
 
-            $order->route = $pdfName;
+            $filename = 'bill_' . $order->id . '_' . Carbon::now()->format('YmdHis') . '.pdf';
+            $pdfPath = $dir . DIRECTORY_SEPARATOR . $filename;
+
+            file_put_contents($pdfPath, $pdf);
+
+            // Store public-relative route
+            $order->route = 'uploads/bills/' . $filename;
             $order->save();
 
             DB::commit();
