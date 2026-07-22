@@ -1,3 +1,15 @@
+FROM node:20 AS frontend-build
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+RUN npm run build
+
 FROM php:8.1-fpm
 
 RUN apt-get update && apt-get install -y \
@@ -9,6 +21,8 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www/html
 
 COPY . .
+
+COPY --from=frontend-build /app/public/build /var/www/html/public/build
 
 RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
 
