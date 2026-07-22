@@ -2,10 +2,18 @@ FROM node:20 AS frontend-build
 
 WORKDIR /app
 
-COPY package*.json ./
+# Copy only the package manifests first so npm install is cached
+# independently of source changes and always resolves dependencies
+# (including devDependencies like Bootstrap) from these files.
+COPY package.json package-lock.json* ./
 
-RUN npm install
+# Force devDependencies to be installed even if NODE_ENV=production
+# leaks into the build environment, since Bootstrap and the Vite
+# tooling are declared as devDependencies in package.json.
+RUN npm install --include=dev
 
+# Copy the rest of the project files after dependencies are installed
+# so npm install layers stay cached across unrelated source changes.
 COPY . .
 
 RUN npm run build
