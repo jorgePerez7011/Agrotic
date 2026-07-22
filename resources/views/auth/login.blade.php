@@ -68,8 +68,8 @@
     </style>
 
     <div class="login-box">
-        <div class="icon-container">
-            <img src="{{ asset('assets/cow-ufo.gif') }}" width="120"
+            <div class="icon-container">
+            <img src="{{ secure_asset('assets/cow-ufo.gif') }}" width="120"
                 height="100" alt="icono de dron" title="icono de dron" class="img-small">
         </div>
         <div>

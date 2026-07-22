@@ -70,7 +70,7 @@
     <div class="notfound">
         <div class="title">Estamos trabajando en este apartado, visitanos luego</div> 
         <div class="notfound-image"></div> 
-        <a href="{{ url('http://127.0.0.1:8000/home') }}" class="btn-home">Ir a Inicio</a> 
+        <a href="{{ secure_url('/home') }}" class="btn-home">Ir a Inicio</a> 
     </div>
 </div>
 

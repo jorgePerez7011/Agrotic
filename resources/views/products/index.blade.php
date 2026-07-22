@@ -185,24 +185,24 @@
                                                     <td>
                                                         @if ($product->image)
                                                             <center>
-                                                                @if (filter_var($product->image, FILTER_VALIDATE_URL))
+                                                                    @if (filter_var($product->image, FILTER_VALIDATE_URL))
                                                                     <img class="img-thumbnail"
                                                                         src="{{ $product->image }}"
                                                                         style="max-width: 100px; height: auto;" 
                                                                         alt="{{ $product->name }}"
-                                                                        onerror="this.src='{{ asset('backend/dist/img/no-image.png') }}'; this.onerror=null;">
+                                                                        onerror="this.src='{{ secure_asset('backend/dist/img/no-image.png') }}'; this.onerror=null;">
                                                                 @else
                                                                     <img class="img-thumbnail"
-                                                                        src="{{ asset('uploads/products/' . $product->image) }}"
+                                                                        src="{{ secure_asset('uploads/products/' . $product->image) }}"
                                                                         style="max-width: 100px; height: auto;" 
                                                                         alt="{{ $product->name }}"
-                                                                        onerror="this.src='{{ asset('backend/dist/img/no-image.png') }}'; this.onerror=null;">
+                                                                        onerror="this.src='{{ secure_asset('backend/dist/img/no-image.png') }}'; this.onerror=null;">
                                                                 @endif
                                                             </center>
                                                         @else
                                                             <center>
                                                                 <img class="img-thumbnail"
-                                                                    src="{{ asset('backend/dist/img/no-image.png') }}"
+                                                                    src="{{ secure_asset('backend/dist/img/no-image.png') }}"
                                                                     style="max-width: 100px; height: auto;" 
                                                                     alt="Sin imagen">
                                                             </center>

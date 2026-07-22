@@ -48,7 +48,7 @@
                                                 <td>
                                                     @if ($client->photo)
                                                         <center>
-                                                            <img class="img-thumbnail" src="{{ asset('uploads/clients/' . $client->photo) }}" style="height: 70px; width: 70px;" alt="Foto">
+                                                            <img class="img-thumbnail" src="{{ secure_asset('uploads/clients/' . $client->photo) }}" style="height: 70px; width: 70px;" alt="Foto">
                                                         </center>
                                                     @else
                                                         <span class="text-muted">Sin foto</span>
