@@ -22,18 +22,15 @@
                                 @csrf
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-4 mb-3">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Name<strong style="color:red;">(*)</strong></label>
                                                 <input type="text" class="form-control" name="name"
                                                     placeholder="Enter the client name" autocomplete="off"
-                                                    value="{{ old('nombre') }}">
+                                                    value="{{ old('name') }}">
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-4 mb-3">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Document<strong style="color:red;">(*)</strong></label>
                                                 <input type="text" class="form-control" name="document"
@@ -41,10 +38,7 @@
                                                     value="{{ old('document') }}">
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-4 mb-3">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Photo</label>
                                                 <input type="file" class="form-control-file" name="photo" id="photo">
@@ -53,43 +47,37 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-8 mb-3">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Address<strong style="color:red;">(*)</strong></label>
-                                                <textarea class="form-control" name="address" placeholder="Enter the client address" cols="120" rows="4"></textarea>
+                                                <textarea class="form-control" name="address" placeholder="Enter the client address" rows="4">{{ old('address') }}</textarea>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">City<strong style="color:red;">(*)</strong></label>
-                                                <input type="text" class="form-control" name="city"
-                                                    placeholder="Enter the client city" autocomplete="off"
-                                                    value="{{ old('nombre') }}">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Phone<strong style="color:red;">(*)</strong></label>
-                                                <input type="text" class="form-control" name="phone"
-                                                    placeholder="Enter the client phone" autocomplete="off"
-                                                    value="{{ old('nombre') }}">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-4 mb-3">
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Email<strong style="color:red;">(*)</strong></label>
                                                 <input type="text" class="form-control" name="email"
                                                     placeholder="Enter the client email" autocomplete="off"
-                                                    value="{{ old('nombre') }}">
+                                                    value="{{ old('email') }}">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6 mb-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">City<strong style="color:red;">(*)</strong></label>
+                                                <input type="text" class="form-control" name="city"
+                                                    placeholder="Enter the client city" autocomplete="off"
+                                                    value="{{ old('city') }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Phone<strong style="color:red;">(*)</strong></label>
+                                                <input type="text" class="form-control" name="phone"
+                                                    placeholder="Enter the client phone" autocomplete="off"
+                                                    value="{{ old('phone') }}">
                                             </div>
                                         </div>
                                     </div>

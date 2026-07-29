@@ -23,41 +23,35 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="card-body">
-
-                                    {{-- Nombre --}}
-                                    <div class="form-group">
-                                        <label>Nombre <strong style="color:red;">(*)</strong></label>
-                                        <input type="text" class="form-control" name="name"
-                                            placeholder="Nombre del producto"
-                                            value="{{ $product->name }}">
+                                    <div class="row">
+                                        <div class="col-lg-4 mb-3">
+                                            <label>Nombre <strong style="color:red;">(*)</strong></label>
+                                            <input type="text" class="form-control" name="name"
+                                                placeholder="Nombre del producto"
+                                                value="{{ $product->name }}">
+                                        </div>
+                                        <div class="col-lg-4 mb-3">
+                                            <label>Precio <strong style="color:red;">(*)</strong></label>
+                                            <input type="number" step="0.01" class="form-control" name="price"
+                                                placeholder="Ej: 9.99"
+                                                value="{{ $product->price }}">
+                                        </div>
+                                        <div class="col-lg-4 mb-3">
+                                            <label>Cantidad <strong style="color:red;">(*)</strong></label>
+                                            <input type="number" class="form-control" name="quantity"
+                                                placeholder="Unidades disponibles"
+                                                value="{{ $product->quantity }}">
+                                        </div>
                                     </div>
 
-                                    {{-- Descripción --}}
-                                    <div class="form-group">
+                                    <div class="form-group mb-3">
                                         <label>Descripción <strong style="color:red;">(*)</strong></label>
                                         <input type="text" class="form-control" name="description"
                                             placeholder="Breve descripción"
                                             value="{{ $product->description }}">
                                     </div>
 
-                                    {{-- Precio --}}
-                                    <div class="form-group">
-                                        <label>Precio <strong style="color:red;">(*)</strong></label>
-                                        <input type="number" step="0.01" class="form-control" name="price"
-                                            placeholder="Ej: 9.99"
-                                            value="{{ $product->price }}">
-                                    </div>
-
-                                    {{-- Cantidad --}}
-                                    <div class="form-group">
-                                        <label>Cantidad <strong style="color:red;">(*)</strong></label>
-                                        <input type="number" class="form-control" name="quantity"
-                                            placeholder="Unidades disponibles"
-                                            value="{{ $product->quantity }}">
-                                    </div>
-
-                                    {{-- Imagen --}}
-                                    <div class="form-group">
+                                    <div class="form-group mb-3">
                                         <label>Imagen</label>
                                         <input type="file" class="form-control-file" name="image" id="image">
                                     </div>

@@ -74,38 +74,33 @@
                             <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
-                                    <!-- Nombre -->
-                                    <div class="form-group">
-                                        <label class="control-label">Nombre <strong style="color:red;">(*)</strong></label>
-                                        <input type="text" class="form-control" name="name"
-                                            placeholder="Ingrese el nombre del producto" autocomplete="off"
-                                            value="{{ old('name') }}">
+                                    <div class="row">
+                                        <div class="col-lg-4 mb-3">
+                                            <label class="control-label">Nombre <strong style="color:red;">(*)</strong></label>
+                                            <input type="text" class="form-control" name="name"
+                                                placeholder="Ingrese el nombre del producto" autocomplete="off"
+                                                value="{{ old('name') }}">
+                                        </div>
+                                        <div class="col-lg-4 mb-3">
+                                            <label class="control-label">Cantidad <strong style="color:red;">(*)</strong></label>
+                                            <input type="text" class="form-control" name="quantity"
+                                                placeholder="Ingrese la cantidad del producto" autocomplete="off"
+                                                value="{{ old('quantity') }}">
+                                        </div>
+                                        <div class="col-lg-4 mb-3">
+                                            <label class="control-label">Precio <strong style="color:red;">(*)</strong></label>
+                                            <input type="text" class="form-control" name="price"
+                                                placeholder="Ingrese el precio del producto" autocomplete="off"
+                                                value="{{ old('price') }}">
+                                        </div>
                                     </div>
 
-                                    <!-- Descripción -->
-                                    <div class="form-group">
+                                    <div class="form-group mb-3">
                                         <label class="control-label">Descripcion <strong style="color:red;">(*)</strong></label>
-                                        <textarea class="form-control" name="description" placeholder="Ingrese la descripcion del producto" cols="120" rows="4"></textarea>
+                                        <textarea class="form-control" name="description" placeholder="Ingrese la descripcion del producto" rows="4">{{ old('description') }}</textarea>
                                     </div>
 
-                                    <!-- Cantidad -->
-                                    <div class="form-group">
-                                        <label class="control-label">Cantidad <strong style="color:red;">(*)</strong></label>
-                                        <input type="text" class="form-control" name="quantity"
-                                            placeholder="Ingrese la cantidad del producto" autocomplete="off"
-                                            value="{{ old('quantity') }}">
-                                    </div>
-
-                                    <!-- Precio -->
-                                    <div class="form-group">
-                                        <label class="control-label">Precio <strong style="color:red;">(*)</strong></label>
-                                        <input type="text" class="form-control" name="price"
-                                            placeholder="Ingrese el precio del producto" autocomplete="off"
-                                            value="{{ old('price') }}">
-                                    </div>
-
-                                    <!-- Imagen del Producto -->
-                                    <div class="form-group">
+                                    <div class="form-group mb-3">
                                         <label class="control-label">Imagen del Producto</label>
                                         <div class="border p-3 rounded" style="background-color: #F1F8E9;">
                                             <div class="mb-3">
@@ -131,7 +126,6 @@
                                                 </div>
                                             </div>
 
-                                            <!-- Vista previa de la imagen -->
                                             <div class="mt-3">
                                                 <label>Vista previa:</label>
                                                 <div id="image-preview" class="mt-2 text-center">
@@ -142,7 +136,6 @@
                                         </div>
                                     </div>
 
-                                    <!-- Hidden fields -->
                                     <input type="hidden" class="form-control" name="status" value="1">
                                     <input type="hidden" class="form-control" name="registered_by" value="{{ Auth::user()->id }}">
                                 </div>
