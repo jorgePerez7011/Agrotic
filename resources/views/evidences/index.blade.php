@@ -48,10 +48,31 @@
         .table th {
             background-color: #A5D6A7 !important;
             color: #1B5E20 !important;
+            white-space: nowrap;
         }
 
         .table-hover tbody tr:hover {
             background-color: #E8F5E9;
+        }
+
+        .table td {
+            vertical-align: top;
+            font-size: 0.92rem;
+            line-height: 1.35;
+        }
+
+        .table td .text-cell {
+            display: block;
+            max-width: 220px;
+            white-space: normal;
+            word-break: break-word;
+        }
+
+        .table td .small-cell {
+            display: block;
+            max-width: 180px;
+            white-space: normal;
+            word-break: break-word;
         }
 
         .toggle-class {
@@ -103,8 +124,19 @@
                                             <tr>
                                                 <th>Date</th>
                                                 <th>Photo</th>
-                                                <th>Description</th>
-                                                <th>Location</th>
+                                                <th>Cultivo</th>
+                                                <th>Área total (m²)</th>
+                                                <th>Área cultivable (m²)</th>
+                                                <th>Descripción / Análisis</th>
+                                                <th>Ubicación</th>
+                                                <th>Zonas del terreno</th>
+                                                <th>Plan de siembra</th>
+                                                <th>Sistema de riego</th>
+                                                <th>Ruta de tránsito</th>
+                                                <th>Plan de recolección</th>
+                                                <th>Consideraciones adicionales</th>
+                                                <th>Resumen</th>
+                                                <th>Inversión estimada</th>
                                                 <th>Status</th>
                                                 <th>Actions</th>
                                             </tr>
@@ -120,20 +152,33 @@
                                                          style="max-width: 100px; cursor: pointer"
                                                          onclick="window.open(this.src, '_blank')">
                                                 </td>
-                                                <td>{{ $evidence->description }}</td>                                                <td>
+                                                <td><span class="small-cell">{{ $evidence->crop ?: 'N/A' }}</span></td>
+                                                <td><span class="small-cell">{{ $evidence->total_area !== null ? number_format($evidence->total_area, 2, ',', '.') : 'N/A' }}</span></td>
+                                                <td><span class="small-cell">{{ $evidence->cultivable_area !== null ? number_format($evidence->cultivable_area, 2, ',', '.') : 'N/A' }}</span></td>
+                                                <td style="min-width: 220px;"><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->description, 120) }}</span></td>
+                                                <td>
                                                     @if($evidence->location)
                                                         <a href="javascript:void(0);" 
                                                            class="text-decoration-none show-location" 
                                                            data-location="{{ $evidence->location }}"
                                                            style="color: #2E7D32;">
                                                             <i class="fas fa-map-marker-alt mr-1"></i>
-                                                            {{ $evidence->location }}
+                                                            <span class="small-cell">{{ $evidence->location }}</span>
                                                         </a>
                                                     @else
                                                         <span class="text-muted">N/A</span>
                                                     @endif
                                                 </td>
-                                                <td>                                                <button class="btn btn-sm status-toggle rounded-pill" 
+                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->terrain_zones, 80) ?: 'N/A' }}</span></td>
+                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->planting_plan, 80) ?: 'N/A' }}</span></td>
+                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->irrigation_system, 80) ?: 'N/A' }}</span></td>
+                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->transit_route, 80) ?: 'N/A' }}</span></td>
+                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->collection_plan, 80) ?: 'N/A' }}</span></td>
+                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->additional_considerations, 80) ?: 'N/A' }}</span></td>
+                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->summary, 80) ?: 'N/A' }}</span></td>
+                                                <td><span class="small-cell">{{ $evidence->estimated_investment !== null ? number_format($evidence->estimated_investment, 2, ',', '.') : 'N/A' }}</span></td>
+                                                <td>
+                                                    <button class="btn btn-sm status-toggle rounded-pill" 
                                                             style="{{ $evidence->status ? 'background-color: #4CAF50; color: white;' : 'background-color: #dc3545; color: white;' }}"
                                                             data-id="{{ $evidence->id }}">
                                                         <i class="fas fa-{{ $evidence->status ? 'check-circle' : 'times-circle' }} mr-1"></i>

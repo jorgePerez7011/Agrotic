@@ -98,11 +98,8 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-6">
+                    <div class="col-12">
                         <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
-                    </div>
-                    <div class="col-6">
-                        <a href="register" class="btn btn-secondary btn-block">Registrarse</a>
                     </div>
                 </div>
             </form>

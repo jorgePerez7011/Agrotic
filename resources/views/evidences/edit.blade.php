@@ -59,7 +59,61 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="description">Description</label>
+                                    <label for="date">Date</label>
+                                    <input type="datetime-local" 
+                                           class="form-control @error('date') is-invalid @enderror" 
+                                           id="date" 
+                                           name="date" 
+                                           value="{{ $evidence->date->format('Y-m-d\TH:i') }}"
+                                           required>
+                                    @error('date')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="crop">Cultivo</label>
+                                    <input type="text"
+                                           class="form-control @error('crop') is-invalid @enderror"
+                                           id="crop"
+                                           name="crop"
+                                           value="{{ $evidence->crop }}"
+                                           placeholder="Ej. Maíz, café, cacao">
+                                    @error('crop')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="total_area">Área total del terreno (m²)</label>
+                                    <input type="number"
+                                           step="0.01"
+                                           class="form-control @error('total_area') is-invalid @enderror"
+                                           id="total_area"
+                                           name="total_area"
+                                           value="{{ $evidence->total_area }}"
+                                           placeholder="Ej. 5000">
+                                    @error('total_area')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="cultivable_area">Área cultivable (m²)</label>
+                                    <input type="number"
+                                           step="0.01"
+                                           class="form-control @error('cultivable_area') is-invalid @enderror"
+                                           id="cultivable_area"
+                                           name="cultivable_area"
+                                           value="{{ $evidence->cultivable_area }}"
+                                           placeholder="Ej. 3500">
+                                    @error('cultivable_area')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="description">Descripción / Análisis</label>
                                     <textarea class="form-control @error('description') is-invalid @enderror" 
                                               id="description" 
                                               name="description" 
@@ -71,13 +125,13 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="location">Location</label>
+                                    <label for="location">Ubicación</label>
                                     <input type="text" 
                                            class="form-control @error('location') is-invalid @enderror" 
                                            id="location" 
                                            name="location" 
                                            value="{{ $evidence->location }}"
-                                           placeholder="Enter location"
+                                           placeholder="Ingrese la ubicación"
                                            required>
                                     @error('location')
                                         <span class="invalid-feedback">{{ $message }}</span>
@@ -85,14 +139,92 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="date">Date</label>
-                                    <input type="datetime-local" 
-                                           class="form-control @error('date') is-invalid @enderror" 
-                                           id="date" 
-                                           name="date" 
-                                           value="{{ $evidence->date->format('Y-m-d\TH:i') }}"
-                                           required>
-                                    @error('date')
+                                    <label for="terrain_zones">Zonas del terreno</label>
+                                    <textarea class="form-control @error('terrain_zones') is-invalid @enderror"
+                                              id="terrain_zones"
+                                              name="terrain_zones"
+                                              rows="3">{{ $evidence->terrain_zones }}</textarea>
+                                    @error('terrain_zones')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="planting_plan">Plan de siembra</label>
+                                    <textarea class="form-control @error('planting_plan') is-invalid @enderror"
+                                              id="planting_plan"
+                                              name="planting_plan"
+                                              rows="3">{{ $evidence->planting_plan }}</textarea>
+                                    @error('planting_plan')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="irrigation_system">Sistema de riego</label>
+                                    <textarea class="form-control @error('irrigation_system') is-invalid @enderror"
+                                              id="irrigation_system"
+                                              name="irrigation_system"
+                                              rows="3">{{ $evidence->irrigation_system }}</textarea>
+                                    @error('irrigation_system')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="transit_route">Ruta de tránsito</label>
+                                    <textarea class="form-control @error('transit_route') is-invalid @enderror"
+                                              id="transit_route"
+                                              name="transit_route"
+                                              rows="3">{{ $evidence->transit_route }}</textarea>
+                                    @error('transit_route')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="collection_plan">Plan de recolección</label>
+                                    <textarea class="form-control @error('collection_plan') is-invalid @enderror"
+                                              id="collection_plan"
+                                              name="collection_plan"
+                                              rows="3">{{ $evidence->collection_plan }}</textarea>
+                                    @error('collection_plan')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="additional_considerations">Consideraciones adicionales</label>
+                                    <textarea class="form-control @error('additional_considerations') is-invalid @enderror"
+                                              id="additional_considerations"
+                                              name="additional_considerations"
+                                              rows="3">{{ $evidence->additional_considerations }}</textarea>
+                                    @error('additional_considerations')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="summary">Resumen</label>
+                                    <textarea class="form-control @error('summary') is-invalid @enderror"
+                                              id="summary"
+                                              name="summary"
+                                              rows="3">{{ $evidence->summary }}</textarea>
+                                    @error('summary')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="estimated_investment">Inversión estimada</label>
+                                    <input type="number"
+                                           step="0.01"
+                                           class="form-control @error('estimated_investment') is-invalid @enderror"
+                                           id="estimated_investment"
+                                           name="estimated_investment"
+                                           value="{{ $evidence->estimated_investment }}"
+                                           placeholder="Ej. 1500000">
+                                    @error('estimated_investment')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
                                 </div>

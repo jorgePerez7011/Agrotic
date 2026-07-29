@@ -26,6 +26,17 @@ class EvidenceController extends Controller
             'photo' => 'required|image|mimes:jpg,jpeg,png|max:2048',
             'date' => 'required|date',
             'location' => 'required|string|max:255',
+            'crop' => 'nullable|string|max:255',
+            'total_area' => 'nullable|numeric',
+            'cultivable_area' => 'nullable|numeric',
+            'terrain_zones' => 'nullable|string',
+            'planting_plan' => 'nullable|string',
+            'irrigation_system' => 'nullable|string',
+            'transit_route' => 'nullable|string',
+            'collection_plan' => 'nullable|string',
+            'additional_considerations' => 'nullable|string',
+            'summary' => 'nullable|string',
+            'estimated_investment' => 'nullable|numeric',
             'status' => 'boolean'
         ]);
 
@@ -33,6 +44,17 @@ class EvidenceController extends Controller
         $evidence->description = $request->description;
         $evidence->date = $request->date;
         $evidence->location = $request->location;
+        $evidence->crop = $request->crop;
+        $evidence->total_area = $request->total_area;
+        $evidence->cultivable_area = $request->cultivable_area;
+        $evidence->terrain_zones = $request->terrain_zones;
+        $evidence->planting_plan = $request->planting_plan;
+        $evidence->irrigation_system = $request->irrigation_system;
+        $evidence->transit_route = $request->transit_route;
+        $evidence->collection_plan = $request->collection_plan;
+        $evidence->additional_considerations = $request->additional_considerations;
+        $evidence->summary = $request->summary;
+        $evidence->estimated_investment = $request->estimated_investment;
         $evidence->status = $request->has('status');
 
         if ($request->hasFile('photo')) {
@@ -57,12 +79,34 @@ class EvidenceController extends Controller
             'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'date' => 'required|date',
             'location' => 'required|string|max:255',
+            'crop' => 'nullable|string|max:255',
+            'total_area' => 'nullable|numeric',
+            'cultivable_area' => 'nullable|numeric',
+            'terrain_zones' => 'nullable|string',
+            'planting_plan' => 'nullable|string',
+            'irrigation_system' => 'nullable|string',
+            'transit_route' => 'nullable|string',
+            'collection_plan' => 'nullable|string',
+            'additional_considerations' => 'nullable|string',
+            'summary' => 'nullable|string',
+            'estimated_investment' => 'nullable|numeric',
             'status' => 'boolean'
         ]);
 
         $evidence->description = $request->description;
         $evidence->date = $request->date;
         $evidence->location = $request->location;
+        $evidence->crop = $request->crop;
+        $evidence->total_area = $request->total_area;
+        $evidence->cultivable_area = $request->cultivable_area;
+        $evidence->terrain_zones = $request->terrain_zones;
+        $evidence->planting_plan = $request->planting_plan;
+        $evidence->irrigation_system = $request->irrigation_system;
+        $evidence->transit_route = $request->transit_route;
+        $evidence->collection_plan = $request->collection_plan;
+        $evidence->additional_considerations = $request->additional_considerations;
+        $evidence->summary = $request->summary;
+        $evidence->estimated_investment = $request->estimated_investment;
         $evidence->status = $request->has('status');
 
         if ($request->hasFile('photo')) {
@@ -83,7 +127,7 @@ class EvidenceController extends Controller
         if ($evidence->photo) {
             Storage::disk('public')->delete($evidence->photo);
         }
-        
+
         $evidence->delete();
         return redirect()->route('evidences.index')->with('success', 'Evidencia eliminada exitosamente.');
     }
@@ -92,7 +136,7 @@ class EvidenceController extends Controller
     {
         $evidence->status = !$evidence->status;
         $evidence->save();
-        
+
         return response()->json([
             'success' => true,
             'status' => $evidence->status
