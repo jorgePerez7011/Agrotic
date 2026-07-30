@@ -20,70 +20,18 @@
         </div>
     </div>
 
-    <div class="modal fade" id="evidenceDetailModal" tabindex="-1" role="dialog" aria-labelledby="evidenceDetailModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
+    <div class="modal fade" id="fieldDetailModal" tabindex="-1" role="dialog" aria-labelledby="fieldDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="background: linear-gradient(to right, #2E7D32, #4CAF50);">
-                    <h5 class="modal-title text-white" id="evidenceDetailModalLabel">Detalle completo de la evidencia</h5>
+                    <h5 class="modal-title text-white" id="fieldDetailModalLabel">Detalle</h5>
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <h6 class="font-weight-bold">Descripción / Análisis</h6>
-                            <p class="detail-value" id="detail-description"></p>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <h6 class="font-weight-bold">Ubicación</h6>
-                            <p class="detail-value" id="detail-location"></p>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <h6 class="font-weight-bold">Cultivo</h6>
-                            <p class="detail-value" id="detail-crop"></p>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <h6 class="font-weight-bold">Área total (m²)</h6>
-                            <p class="detail-value" id="detail-total-area"></p>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <h6 class="font-weight-bold">Área cultivable (m²)</h6>
-                            <p class="detail-value" id="detail-cultivable-area"></p>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <h6 class="font-weight-bold">Zonas del terreno</h6>
-                            <p class="detail-value" id="detail-terrain-zones"></p>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <h6 class="font-weight-bold">Plan de siembra</h6>
-                            <p class="detail-value" id="detail-planting-plan"></p>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <h6 class="font-weight-bold">Sistema de riego</h6>
-                            <p class="detail-value" id="detail-irrigation-system"></p>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <h6 class="font-weight-bold">Ruta de tránsito</h6>
-                            <p class="detail-value" id="detail-transit-route"></p>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <h6 class="font-weight-bold">Plan de recolección</h6>
-                            <p class="detail-value" id="detail-collection-plan"></p>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <h6 class="font-weight-bold">Consideraciones adicionales</h6>
-                            <p class="detail-value" id="detail-additional-considerations"></p>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <h6 class="font-weight-bold">Resumen</h6>
-                            <p class="detail-value" id="detail-summary"></p>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <h6 class="font-weight-bold">Inversión estimada</h6>
-                            <p class="detail-value" id="detail-estimated-investment"></p>
-                        </div>
-                    </div>
+                    <h6 class="font-weight-bold text-success" id="field-detail-title"></h6>
+                    <p class="detail-value" id="field-detail-content"></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
@@ -156,6 +104,23 @@
             margin-bottom: 0;
             white-space: pre-wrap;
             word-break: break-word;
+        }
+
+        .field-preview {
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            text-underline-offset: 2px;
+        }
+
+        .field-preview:hover {
+            color: #1B5E20;
+        }
+
+        .location-tools {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
         }
     </style>
 
@@ -233,27 +198,91 @@
                                                 <td><span class="small-cell">{{ $evidence->crop ?: 'N/A' }}</span></td>
                                                 <td><span class="small-cell">{{ $evidence->total_area !== null ? number_format($evidence->total_area, 2, ',', '.') : 'N/A' }}</span></td>
                                                 <td><span class="small-cell">{{ $evidence->cultivable_area !== null ? number_format($evidence->cultivable_area, 2, ',', '.') : 'N/A' }}</span></td>
-                                                <td style="min-width: 220px;"><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->description, 120) }}</span></td>
+                                                <td style="min-width: 220px;">
+                                                    <span class="text-cell field-preview show-field-detail"
+                                                          data-title="Descripción / Análisis"
+                                                          data-content="{{ $evidence->description ?: 'N/A' }}"
+                                                          title="Click para ver completo">
+                                                        {{ Illuminate\Support\Str::limit($evidence->description, 120) }}
+                                                    </span>
+                                                </td>
                                                 <td>
                                                     @if($evidence->location)
-                                                        <a href="javascript:void(0);" 
-                                                           class="text-decoration-none show-location" 
-                                                           data-location="{{ $evidence->location }}"
-                                                           style="color: #2E7D32;">
-                                                            <i class="fas fa-map-marker-alt mr-1"></i>
-                                                            <span class="small-cell">{{ $evidence->location }}</span>
-                                                        </a>
+                                                        <div class="location-tools">
+                                                            <a href="javascript:void(0);"
+                                                               class="text-decoration-none show-location"
+                                                               data-location="{{ $evidence->location }}"
+                                                               style="color: #2E7D32;"
+                                                               title="Ver en mapa">
+                                                                <i class="fas fa-map-marker-alt"></i>
+                                                            </a>
+                                                            <span class="small-cell field-preview show-field-detail"
+                                                                  data-title="Ubicación"
+                                                                  data-content="{{ $evidence->location }}"
+                                                                  title="Click para ver completo">
+                                                                {{ Illuminate\Support\Str::limit($evidence->location, 80) }}
+                                                            </span>
+                                                        </div>
                                                     @else
                                                         <span class="text-muted">N/A</span>
                                                     @endif
                                                 </td>
-                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->terrain_zones, 80) ?: 'N/A' }}</span></td>
-                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->planting_plan, 80) ?: 'N/A' }}</span></td>
-                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->irrigation_system, 80) ?: 'N/A' }}</span></td>
-                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->transit_route, 80) ?: 'N/A' }}</span></td>
-                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->collection_plan, 80) ?: 'N/A' }}</span></td>
-                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->additional_considerations, 80) ?: 'N/A' }}</span></td>
-                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->summary, 80) ?: 'N/A' }}</span></td>
+                                                <td>
+                                                    <span class="text-cell field-preview show-field-detail"
+                                                          data-title="Zonas del terreno"
+                                                          data-content="{{ $evidence->terrain_zones ?: 'N/A' }}"
+                                                          title="Click para ver completo">
+                                                        {{ Illuminate\Support\Str::limit($evidence->terrain_zones, 80) ?: 'N/A' }}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="text-cell field-preview show-field-detail"
+                                                          data-title="Plan de siembra"
+                                                          data-content="{{ $evidence->planting_plan ?: 'N/A' }}"
+                                                          title="Click para ver completo">
+                                                        {{ Illuminate\Support\Str::limit($evidence->planting_plan, 80) ?: 'N/A' }}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="text-cell field-preview show-field-detail"
+                                                          data-title="Sistema de riego"
+                                                          data-content="{{ $evidence->irrigation_system ?: 'N/A' }}"
+                                                          title="Click para ver completo">
+                                                        {{ Illuminate\Support\Str::limit($evidence->irrigation_system, 80) ?: 'N/A' }}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="text-cell field-preview show-field-detail"
+                                                          data-title="Ruta de tránsito"
+                                                          data-content="{{ $evidence->transit_route ?: 'N/A' }}"
+                                                          title="Click para ver completo">
+                                                        {{ Illuminate\Support\Str::limit($evidence->transit_route, 80) ?: 'N/A' }}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="text-cell field-preview show-field-detail"
+                                                          data-title="Plan de recolección"
+                                                          data-content="{{ $evidence->collection_plan ?: 'N/A' }}"
+                                                          title="Click para ver completo">
+                                                        {{ Illuminate\Support\Str::limit($evidence->collection_plan, 80) ?: 'N/A' }}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="text-cell field-preview show-field-detail"
+                                                          data-title="Consideraciones adicionales"
+                                                          data-content="{{ $evidence->additional_considerations ?: 'N/A' }}"
+                                                          title="Click para ver completo">
+                                                        {{ Illuminate\Support\Str::limit($evidence->additional_considerations, 80) ?: 'N/A' }}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="text-cell field-preview show-field-detail"
+                                                          data-title="Resumen"
+                                                          data-content="{{ $evidence->summary ?: 'N/A' }}"
+                                                          title="Click para ver completo">
+                                                        {{ Illuminate\Support\Str::limit($evidence->summary, 80) ?: 'N/A' }}
+                                                    </span>
+                                                </td>
                                                 <td><span class="small-cell">{{ $evidence->estimated_investment !== null ? number_format($evidence->estimated_investment, 2, ',', '.') : 'N/A' }}</span></td>
                                                 <td>
                                                     <button class="btn btn-sm status-toggle rounded-pill" 
@@ -265,24 +294,6 @@
                                                 </td>
                                                 <td>
                                                     <div class="btn-group">
-                                                        <button type="button"
-                                                                class="btn btn-success btn-sm view-evidence-details"
-                                                                title="Ver detalle completo"
-                                                                data-description="{{ $evidence->description ?: 'N/A' }}"
-                                                                data-location="{{ $evidence->location ?: 'N/A' }}"
-                                                                data-crop="{{ $evidence->crop ?: 'N/A' }}"
-                                                                data-total-area="{{ $evidence->total_area !== null ? number_format($evidence->total_area, 2, ',', '.') : 'N/A' }}"
-                                                                data-cultivable-area="{{ $evidence->cultivable_area !== null ? number_format($evidence->cultivable_area, 2, ',', '.') : 'N/A' }}"
-                                                                data-terrain-zones="{{ $evidence->terrain_zones ?: 'N/A' }}"
-                                                                data-planting-plan="{{ $evidence->planting_plan ?: 'N/A' }}"
-                                                                data-irrigation-system="{{ $evidence->irrigation_system ?: 'N/A' }}"
-                                                                data-transit-route="{{ $evidence->transit_route ?: 'N/A' }}"
-                                                                data-collection-plan="{{ $evidence->collection_plan ?: 'N/A' }}"
-                                                                data-additional-considerations="{{ $evidence->additional_considerations ?: 'N/A' }}"
-                                                                data-summary="{{ $evidence->summary ?: 'N/A' }}"
-                                                                data-estimated-investment="{{ $evidence->estimated_investment !== null ? number_format($evidence->estimated_investment, 2, ',', '.') : 'N/A' }}">
-                                                            <i class="fas fa-plus"></i>
-                                                        </button>
                                                         <a href="{{ route('evidences.edit', $evidence) }}" 
                                                            class="btn btn-primary btn-sm"
                                                            title="Edit Evidence">
@@ -457,25 +468,12 @@
             trigger: 'hover'
         });
 
-        // Show full evidence details in a modal
-        $('.view-evidence-details').on('click', function() {
-            const $btn = $(this);
-
-            $('#detail-description').text($btn.data('description') || 'N/A');
-            $('#detail-location').text($btn.data('location') || 'N/A');
-            $('#detail-crop').text($btn.data('crop') || 'N/A');
-            $('#detail-total-area').text($btn.data('total-area') || 'N/A');
-            $('#detail-cultivable-area').text($btn.data('cultivable-area') || 'N/A');
-            $('#detail-terrain-zones').text($btn.data('terrain-zones') || 'N/A');
-            $('#detail-planting-plan').text($btn.data('planting-plan') || 'N/A');
-            $('#detail-irrigation-system').text($btn.data('irrigation-system') || 'N/A');
-            $('#detail-transit-route').text($btn.data('transit-route') || 'N/A');
-            $('#detail-collection-plan').text($btn.data('collection-plan') || 'N/A');
-            $('#detail-additional-considerations').text($btn.data('additional-considerations') || 'N/A');
-            $('#detail-summary').text($btn.data('summary') || 'N/A');
-            $('#detail-estimated-investment').text($btn.data('estimated-investment') || 'N/A');
-
-            $('#evidenceDetailModal').modal('show');
+        // Show individual field details in a floating modal
+        $(document).on('click', '.show-field-detail', function() {
+            const $field = $(this);
+            $('#field-detail-title').text($field.data('title') || 'Detalle');
+            $('#field-detail-content').text($field.data('content') || 'N/A');
+            $('#fieldDetailModal').modal('show');
         });
 
         // Initialize Google Maps Modal functionality
@@ -512,7 +510,7 @@
         }
 
         // Handle location click
-        $('.show-location').on('click', function() {
+        $(document).on('click', '.show-location', function() {
             const location = $(this).data('location');
             
             // Use the Geocoding service to convert the location string to coordinates
