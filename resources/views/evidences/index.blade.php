@@ -155,7 +155,7 @@
                                                 <td><span class="small-cell">{{ $evidence->crop ?: 'N/A' }}</span></td>
                                                 <td><span class="small-cell">{{ $evidence->total_area !== null ? number_format($evidence->total_area, 2, ',', '.') : 'N/A' }}</span></td>
                                                 <td><span class="small-cell">{{ $evidence->cultivable_area !== null ? number_format($evidence->cultivable_area, 2, ',', '.') : 'N/A' }}</span></td>
-                                                <td style="min-width: 220px;"><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->description, 120) }}</span></td>
+                                                <td style="min-width: 220px;"><span class="text-cell">{{ $evidence->description }}</span></td>
                                                 <td>
                                                     @if($evidence->location)
                                                         <a href="javascript:void(0);" 
@@ -169,13 +169,13 @@
                                                         <span class="text-muted">N/A</span>
                                                     @endif
                                                 </td>
-                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->terrain_zones, 80) ?: 'N/A' }}</span></td>
-                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->planting_plan, 80) ?: 'N/A' }}</span></td>
-                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->irrigation_system, 80) ?: 'N/A' }}</span></td>
-                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->transit_route, 80) ?: 'N/A' }}</span></td>
-                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->collection_plan, 80) ?: 'N/A' }}</span></td>
-                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->additional_considerations, 80) ?: 'N/A' }}</span></td>
-                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->summary, 80) ?: 'N/A' }}</span></td>
+                                                <td><span class="text-cell">{{ $evidence->terrain_zones ?: 'N/A' }}</span></td>
+                                                <td><span class="text-cell">{{ $evidence->planting_plan ?: 'N/A' }}</span></td>
+                                                <td><span class="text-cell">{{ $evidence->irrigation_system ?: 'N/A' }}</span></td>
+                                                <td><span class="text-cell">{{ $evidence->transit_route ?: 'N/A' }}</span></td>
+                                                <td><span class="text-cell">{{ $evidence->collection_plan ?: 'N/A' }}</span></td>
+                                                <td><span class="text-cell">{{ $evidence->additional_considerations ?: 'N/A' }}</span></td>
+                                                <td><span class="text-cell">{{ $evidence->summary ?: 'N/A' }}</span></td>
                                                 <td><span class="small-cell">{{ $evidence->estimated_investment !== null ? number_format($evidence->estimated_investment, 2, ',', '.') : 'N/A' }}</span></td>
                                                 <td>
                                                     <button class="btn btn-sm status-toggle rounded-pill" 
