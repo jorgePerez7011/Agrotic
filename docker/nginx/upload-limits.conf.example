@@ -1,0 +1,8 @@
+# Add this inside the server block used by Laravel
+# Example: /etc/nginx/sites-available/your-site.conf
+
+client_max_body_size 12M;
+
+location / {
+    try_files $uri $uri/ /index.php?$query_string;
+}

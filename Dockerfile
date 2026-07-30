@@ -30,6 +30,8 @@ WORKDIR /var/www/html
 
 COPY . .
 
+COPY docker/php/uploads.ini /usr/local/etc/php/conf.d/uploads.ini
+
 COPY --from=frontend-build /app/public/build /var/www/html/public/build
 
 RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist

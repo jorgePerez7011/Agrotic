@@ -23,7 +23,7 @@ class EvidenceController extends Controller
     {
         $request->validate([
             'description' => 'required',
-            'photo' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'photo' => 'required|image|mimes:jpg,jpeg,png|max:10240',
             'date' => 'required|date',
             'location' => 'required|string|max:255',
             'crop' => 'nullable|string|max:255',
@@ -76,7 +76,7 @@ class EvidenceController extends Controller
     {
         $request->validate([
             'description' => 'required',
-            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
             'date' => 'required|date',
             'location' => 'required|string|max:255',
             'crop' => 'nullable|string|max:255',
