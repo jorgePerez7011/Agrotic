@@ -108,9 +108,7 @@
 
         .field-preview {
             cursor: pointer;
-            text-decoration: underline;
-            text-decoration-style: dotted;
-            text-underline-offset: 2px;
+            text-decoration: none;
         }
 
         .field-preview:hover {
