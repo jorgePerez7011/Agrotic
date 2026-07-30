@@ -20,6 +20,78 @@
         </div>
     </div>
 
+    <div class="modal fade" id="evidenceDetailModal" tabindex="-1" role="dialog" aria-labelledby="evidenceDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background: linear-gradient(to right, #2E7D32, #4CAF50);">
+                    <h5 class="modal-title text-white" id="evidenceDetailModalLabel">Detalle completo de la evidencia</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <h6 class="font-weight-bold">Descripción / Análisis</h6>
+                            <p class="detail-value" id="detail-description"></p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h6 class="font-weight-bold">Ubicación</h6>
+                            <p class="detail-value" id="detail-location"></p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h6 class="font-weight-bold">Cultivo</h6>
+                            <p class="detail-value" id="detail-crop"></p>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <h6 class="font-weight-bold">Área total (m²)</h6>
+                            <p class="detail-value" id="detail-total-area"></p>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <h6 class="font-weight-bold">Área cultivable (m²)</h6>
+                            <p class="detail-value" id="detail-cultivable-area"></p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h6 class="font-weight-bold">Zonas del terreno</h6>
+                            <p class="detail-value" id="detail-terrain-zones"></p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h6 class="font-weight-bold">Plan de siembra</h6>
+                            <p class="detail-value" id="detail-planting-plan"></p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h6 class="font-weight-bold">Sistema de riego</h6>
+                            <p class="detail-value" id="detail-irrigation-system"></p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h6 class="font-weight-bold">Ruta de tránsito</h6>
+                            <p class="detail-value" id="detail-transit-route"></p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h6 class="font-weight-bold">Plan de recolección</h6>
+                            <p class="detail-value" id="detail-collection-plan"></p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h6 class="font-weight-bold">Consideraciones adicionales</h6>
+                            <p class="detail-value" id="detail-additional-considerations"></p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h6 class="font-weight-bold">Resumen</h6>
+                            <p class="detail-value" id="detail-summary"></p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <h6 class="font-weight-bold">Inversión estimada</h6>
+                            <p class="detail-value" id="detail-estimated-investment"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <style>
         body {
             background: linear-gradient(to bottom right, #D9F99D, #F0FDF4);
@@ -78,6 +150,12 @@
         .toggle-class {
             background-color: #4CAF50;
             border-color: #2E7D32;
+        }
+
+        .detail-value {
+            margin-bottom: 0;
+            white-space: pre-wrap;
+            word-break: break-word;
         }
     </style>
 
@@ -155,7 +233,7 @@
                                                 <td><span class="small-cell">{{ $evidence->crop ?: 'N/A' }}</span></td>
                                                 <td><span class="small-cell">{{ $evidence->total_area !== null ? number_format($evidence->total_area, 2, ',', '.') : 'N/A' }}</span></td>
                                                 <td><span class="small-cell">{{ $evidence->cultivable_area !== null ? number_format($evidence->cultivable_area, 2, ',', '.') : 'N/A' }}</span></td>
-                                                <td style="min-width: 220px;"><span class="text-cell">{{ $evidence->description }}</span></td>
+                                                <td style="min-width: 220px;"><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->description, 120) }}</span></td>
                                                 <td>
                                                     @if($evidence->location)
                                                         <a href="javascript:void(0);" 
@@ -169,13 +247,13 @@
                                                         <span class="text-muted">N/A</span>
                                                     @endif
                                                 </td>
-                                                <td><span class="text-cell">{{ $evidence->terrain_zones ?: 'N/A' }}</span></td>
-                                                <td><span class="text-cell">{{ $evidence->planting_plan ?: 'N/A' }}</span></td>
-                                                <td><span class="text-cell">{{ $evidence->irrigation_system ?: 'N/A' }}</span></td>
-                                                <td><span class="text-cell">{{ $evidence->transit_route ?: 'N/A' }}</span></td>
-                                                <td><span class="text-cell">{{ $evidence->collection_plan ?: 'N/A' }}</span></td>
-                                                <td><span class="text-cell">{{ $evidence->additional_considerations ?: 'N/A' }}</span></td>
-                                                <td><span class="text-cell">{{ $evidence->summary ?: 'N/A' }}</span></td>
+                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->terrain_zones, 80) ?: 'N/A' }}</span></td>
+                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->planting_plan, 80) ?: 'N/A' }}</span></td>
+                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->irrigation_system, 80) ?: 'N/A' }}</span></td>
+                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->transit_route, 80) ?: 'N/A' }}</span></td>
+                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->collection_plan, 80) ?: 'N/A' }}</span></td>
+                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->additional_considerations, 80) ?: 'N/A' }}</span></td>
+                                                <td><span class="text-cell">{{ Illuminate\Support\Str::limit($evidence->summary, 80) ?: 'N/A' }}</span></td>
                                                 <td><span class="small-cell">{{ $evidence->estimated_investment !== null ? number_format($evidence->estimated_investment, 2, ',', '.') : 'N/A' }}</span></td>
                                                 <td>
                                                     <button class="btn btn-sm status-toggle rounded-pill" 
@@ -187,6 +265,24 @@
                                                 </td>
                                                 <td>
                                                     <div class="btn-group">
+                                                        <button type="button"
+                                                                class="btn btn-success btn-sm view-evidence-details"
+                                                                title="Ver detalle completo"
+                                                                data-description="{{ $evidence->description ?: 'N/A' }}"
+                                                                data-location="{{ $evidence->location ?: 'N/A' }}"
+                                                                data-crop="{{ $evidence->crop ?: 'N/A' }}"
+                                                                data-total-area="{{ $evidence->total_area !== null ? number_format($evidence->total_area, 2, ',', '.') : 'N/A' }}"
+                                                                data-cultivable-area="{{ $evidence->cultivable_area !== null ? number_format($evidence->cultivable_area, 2, ',', '.') : 'N/A' }}"
+                                                                data-terrain-zones="{{ $evidence->terrain_zones ?: 'N/A' }}"
+                                                                data-planting-plan="{{ $evidence->planting_plan ?: 'N/A' }}"
+                                                                data-irrigation-system="{{ $evidence->irrigation_system ?: 'N/A' }}"
+                                                                data-transit-route="{{ $evidence->transit_route ?: 'N/A' }}"
+                                                                data-collection-plan="{{ $evidence->collection_plan ?: 'N/A' }}"
+                                                                data-additional-considerations="{{ $evidence->additional_considerations ?: 'N/A' }}"
+                                                                data-summary="{{ $evidence->summary ?: 'N/A' }}"
+                                                                data-estimated-investment="{{ $evidence->estimated_investment !== null ? number_format($evidence->estimated_investment, 2, ',', '.') : 'N/A' }}">
+                                                            <i class="fas fa-plus"></i>
+                                                        </button>
                                                         <a href="{{ route('evidences.edit', $evidence) }}" 
                                                            class="btn btn-primary btn-sm"
                                                            title="Edit Evidence">
@@ -359,7 +455,30 @@
         $('[title]').tooltip({
             placement: 'top',
             trigger: 'hover'
-        });        // Initialize Google Maps Modal functionality
+        });
+
+        // Show full evidence details in a modal
+        $('.view-evidence-details').on('click', function() {
+            const $btn = $(this);
+
+            $('#detail-description').text($btn.data('description') || 'N/A');
+            $('#detail-location').text($btn.data('location') || 'N/A');
+            $('#detail-crop').text($btn.data('crop') || 'N/A');
+            $('#detail-total-area').text($btn.data('total-area') || 'N/A');
+            $('#detail-cultivable-area').text($btn.data('cultivable-area') || 'N/A');
+            $('#detail-terrain-zones').text($btn.data('terrain-zones') || 'N/A');
+            $('#detail-planting-plan').text($btn.data('planting-plan') || 'N/A');
+            $('#detail-irrigation-system').text($btn.data('irrigation-system') || 'N/A');
+            $('#detail-transit-route').text($btn.data('transit-route') || 'N/A');
+            $('#detail-collection-plan').text($btn.data('collection-plan') || 'N/A');
+            $('#detail-additional-considerations').text($btn.data('additional-considerations') || 'N/A');
+            $('#detail-summary').text($btn.data('summary') || 'N/A');
+            $('#detail-estimated-investment').text($btn.data('estimated-investment') || 'N/A');
+
+            $('#evidenceDetailModal').modal('show');
+        });
+
+        // Initialize Google Maps Modal functionality
         let map;
         let marker;
         
