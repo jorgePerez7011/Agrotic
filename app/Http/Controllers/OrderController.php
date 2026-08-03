@@ -167,10 +167,38 @@ class OrderController extends Controller
 
     public function download(Order $order)
     {
-        $path = public_path($order->route);
-        if (!file_exists($path)) {
-            abort(404, 'El comprobante no existe.');
+        $relativePath = trim($order->route ?? '', '/');
+
+        if (!empty($relativePath) && $relativePath !== 'Por hacer') {
+            $path = public_path($relativePath);
+            if (file_exists($path)) {
+                return response()->download($path);
+            }
         }
-        return response()->download($path);
+
+        try {
+            $client = $order->client;
+            $details = $order->orderDetails()->with('product')->get();
+
+            $pdf = PDF::loadView('orders.bill', compact('order', 'client', 'details'))
+                ->setPaper('letter')
+                ->output();
+
+            $dir = public_path('uploads/bills');
+            if (!file_exists($dir)) {
+                mkdir($dir, 0755, true);
+            }
+
+            $filename = 'bill_' . $order->id . '_' . Carbon::now()->format('YmdHis') . '.pdf';
+            $pdfPath = $dir . DIRECTORY_SEPARATOR . $filename;
+            file_put_contents($pdfPath, $pdf);
+
+            $order->route = 'uploads/bills/' . $filename;
+            $order->save();
+
+            return response()->download($pdfPath);
+        } catch (Exception $e) {
+            abort(500, 'No se pudo generar el comprobante.');
+        }
     }
 }

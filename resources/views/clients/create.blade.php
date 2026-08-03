@@ -47,10 +47,20 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-lg-8 mb-3">
+                                        <div class="col-lg-4 mb-3">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Dirección<strong style="color:red;">(*)</strong></label>
-                                                <textarea class="form-control" name="address" placeholder="Enter the client address" rows="4">{{ old('address') }}</textarea>
+                                                <label class="control-label">Ciudad<strong style="color:red;">(*)</strong></label>
+                                                <input type="text" class="form-control" name="city"
+                                                    placeholder="Enter the client city" autocomplete="off"
+                                                    value="{{ old('city') }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 mb-3">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Teléfono<strong style="color:red;">(*)</strong></label>
+                                                <input type="text" class="form-control" name="phone"
+                                                    placeholder="Enter the client phone" autocomplete="off"
+                                                    value="{{ old('phone') }}">
                                             </div>
                                         </div>
                                         <div class="col-lg-4 mb-3">
@@ -64,20 +74,10 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-lg-6 mb-3">
+                                        <div class="col-lg-12 mb-3">
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Ciudad<strong style="color:red;">(*)</strong></label>
-                                                <input type="text" class="form-control" name="city"
-                                                    placeholder="Enter the client city" autocomplete="off"
-                                                    value="{{ old('city') }}">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 mb-3">
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Teléfono<strong style="color:red;">(*)</strong></label>
-                                                <input type="text" class="form-control" name="phone"
-                                                    placeholder="Enter the client phone" autocomplete="off"
-                                                    value="{{ old('phone') }}">
+                                                <label class="control-label">Dirección<strong style="color:red;">(*)</strong></label>
+                                                <textarea class="form-control" name="address" placeholder="Enter the client address" rows="4">{{ old('address') }}</textarea>
                                             </div>
                                         </div>
                                     </div>
