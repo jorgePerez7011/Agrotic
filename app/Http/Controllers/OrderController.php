@@ -164,4 +164,13 @@ class OrderController extends Controller
         $order->status = $request->status;
         $order->save();
     }
+
+    public function download(Order $order)
+    {
+        $path = public_path($order->route);
+        if (!file_exists($path)) {
+            abort(404, 'El comprobante no existe.');
+        }
+        return response()->download($path);
+    }
 }

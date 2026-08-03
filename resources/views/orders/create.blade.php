@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Add loan')
+@section('title', 'Agregar préstamo')
 
 @section('content')
 <style>
@@ -86,9 +86,9 @@
                             @csrf
                             <div class="card-body" id="form-fields">
                                 <div class="form-group">
-                                    <label for="client" class="control-label">User <strong style="color:red;">(*)</strong></label>
+                                    <label for="client" class="control-label">Usuario <strong style="color:red;">(*)</strong></label>
                                     <select id="client" class="form-control select2" name="client" value="{{ old('client') }}">
-                                        <option value="-1">Select a User</option>
+                                        <option value="-1">Seleccione un usuario</option>
                                         @foreach ($clients as $client)
                                             <option value="{{ $client->id }}">{{ $client->name }} ({{ $client->document }})</option>
                                         @endforeach
@@ -100,26 +100,26 @@
 
                                 <div class="row mt-4">
                                     <div class="col-lg-4 col-md-6 mb-3">
-                                        <label for="product" class="form-label">Product</label>
+                                        <label for="product" class="form-label">Implemento</label>
                                         <select id="product" class="form-control select2">
-                                            <option value="-">Select a product</option>
+                                            <option value="-">Seleccione un implemento</option>
                                             @foreach ($products as $product)
                                                 <option value="{{ $product->id }}" 
                                                     data-price="{{ $product->price }}" 
                                                     data-name="{{ $product->name }}"
                                                     data-stock="{{ $product->quantity }}">
-                                                    {{ $product->name }} (Stock: {{ $product->quantity }})
+                                                    {{ $product->name }} (Disponible: {{ $product->quantity }})
                                                 </option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="col-lg-2 col-md-3 mb-3">
-                                        <label for="quantity" class="form-label">Quantity</label>
+                                        <label for="quantity" class="form-label">Cantidad</label>
                                         <input type="number" id="quantity" class="form-control" name="quantity" min="1">
-                                        <small class="text-danger" id="stock-warning" style="display: none;">Insufficient stock</small>
+                                        <small class="text-danger" id="stock-warning" style="display: none;">Stock insuficiente</small>
                                     </div>
                                     <div class="col-lg-2 col-md-3 mb-3">
-                                        <label for="price" class="form-label">Price</label>
+                                        <label for="price" class="form-label">Precio</label>
                                         <input type="number" id="price" class="form-control" name="price" readonly>
                                     </div>
                                     <div class="col-lg-2 col-md-3 mb-3">
@@ -127,7 +127,7 @@
                                         <input type="number" id="subtotal" class="form-control" name="subtotal" readonly>
                                     </div>
                                     <div class="col-lg-2 col-md-3 d-flex align-items-end">
-                                        <button class="btn btn-primary w-100" id="add-btn">Add</button>
+                                        <button class="btn btn-primary w-100" id="add-btn">Agregar</button>
                                     </div>
                                 </div>
 
@@ -136,9 +136,9 @@
                                         <table class="table table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th>Product</th>
-                                                    <th>Quantity</th>
-                                                    <th>Price</th>
+                                                    <th>Implemento</th>
+                                                    <th>Cantidad</th>
+                                                    <th>Precio</th>
                                                     <th>Subtotal</th>
                                                 </tr>
                                             </thead>
@@ -155,10 +155,10 @@
                                         <input name="total" type="hidden">
                                     </div>
                                     <div class="col-lg-4 col-md-6">
-                                        <button type="submit" class="btn btn-primary w-100">Register</button>
+                                        <button type="submit" class="btn btn-primary w-100">Registrar</button>
                                     </div>
                                     <div class="col-lg-4 col-md-6">
-                                        <a href="{{ route('clients.index') }}" class="btn btn-danger w-100">Back</a>
+                                        <a href="{{ route('clients.index') }}" class="btn btn-danger w-100">Volver</a>
                                     </div>
                                 </div>
                             </div>

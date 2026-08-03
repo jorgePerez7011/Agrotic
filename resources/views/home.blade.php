@@ -58,27 +58,31 @@
                             </div>
                             <!-- Préstamos diarios -->
                             <div class="col-lg-3 col-6">
-                                <div class="small-box" style="background-color: #f7e9b5;">
-                                    <div class="inner">
-                                        <h6>{{ $saleCountDay }} / {{ $saleTotalDay }}</h6>
-                                        <p>Pr&eacute;stamos diarios</p>
+                                <a href="{{ route('orders.index') }}" style="text-decoration:none;color:inherit;">
+                                    <div class="small-box" style="background-color: #f7e9b5;">
+                                        <div class="inner">
+                                            <h6>{{ $saleCountDay }} / {{ $saleTotalDay }}</h6>
+                                            <p>Pr&eacute;stamos diarios</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-person-add text-warning"></i>
+                                        </div>
                                     </div>
-                                    <div class="icon">
-                                        <i class="ion ion-person-add text-warning"></i>
-                                    </div>
-                                </div>
+                                </a>
                             </div>
                             <!-- Préstamos mensuales -->
                             <div class="col-lg-3 col-6">
-                                <div class="small-box" style="background-color: #f5b7b1;">
-                                    <div class="inner">
-                                        <h6>{{ $saleCountMonth }} / {{ $saleTotalMonth }}</h6>
-                                        <p>Pr&eacute;stamos mensuales</p>
+                                <a href="{{ route('orders.index') }}" style="text-decoration:none;color:inherit;">
+                                    <div class="small-box" style="background-color: #f5b7b1;">
+                                        <div class="inner">
+                                            <h6>{{ $saleCountMonth }} / {{ $saleTotalMonth }}</h6>
+                                            <p>Pr&eacute;stamos mensuales</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-pie-graph text-danger"></i>
+                                        </div>
                                     </div>
-                                    <div class="icon">
-                                        <i class="ion ion-pie-graph text-danger"></i>
-                                    </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>

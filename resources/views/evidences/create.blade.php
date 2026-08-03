@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', isset($evidence) ? 'Edit Evidence' : 'Add Evidence')
+@section('title', isset($evidence) ? 'Editar evidencia' : 'Agregar evidencia')
 
 @section('content')
 <div class="content-wrapper">
@@ -9,12 +9,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>{{ isset($evidence) ? 'Edit Evidence' : 'Add Evidence' }}</h1>
+                    <h1>{{ isset($evidence) ? 'Editar evidencia' : 'Agregar evidencia' }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('evidences.index') }}">Evidence List</a></li>
-                        <li class="breadcrumb-item active">{{ isset($evidence) ? 'Edit' : 'Add' }}</li>
+                        <li class="breadcrumb-item"><a href="{{ route('evidences.index') }}">Lista de evidencias</a></li>
+                        <li class="breadcrumb-item active">{{ isset($evidence) ? 'Editar' : 'Agregar' }}</li>
                     </ol>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">{{ isset($evidence) ? 'Edit Evidence Details' : 'Add New Evidence' }}</h3>
+                            <h3 class="card-title">{{ isset($evidence) ? 'Editar detalles de evidencia' : 'Agregar nueva evidencia' }}</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -43,7 +43,7 @@
                                 <div class="row">
                                     <div class="col-lg-4 mb-3">
                                         <div class="form-group">
-                                            <label for="photo">Photo</label>
+                                            <label for="photo">Foto</label>
                                             <input type="file" 
                                                    class="form-control @error('photo') is-invalid @enderror" 
                                                    id="photo" 
@@ -56,7 +56,7 @@
                                             @if(isset($evidence) && $evidence->photo)
                                                 <div class="mt-2">
                                                     <img src="{{ Storage::url($evidence->photo) }}" 
-                                                         alt="Current Evidence Photo" 
+                                                         alt="Foto de evidencia actual" 
                                                          class="img-thumbnail"
                                                          style="max-width: 200px;">
                                                 </div>
@@ -65,7 +65,7 @@
                                     </div>
                                     <div class="col-lg-4 mb-3">
                                         <div class="form-group">
-                                            <label for="date">Date</label>
+                                            <label for="date">Fecha</label>
                                             <input type="datetime-local" 
                                                    class="form-control @error('date') is-invalid @enderror" 
                                                    id="date" 
@@ -79,12 +79,12 @@
                                     </div>
                                     <div class="col-lg-4 mb-3">
                                         <div class="form-group">
-                                            <label for="status">Status</label>
+                                            <label for="status">Estado</label>
                                             <select class="form-control @error('status') is-invalid @enderror" 
                                                     id="status" 
                                                     name="status">
-                                                <option value="1" {{ (isset($evidence) && $evidence->status) || old('status') == '1' ? 'selected' : '' }}>Active</option>
-                                                <option value="0" {{ (isset($evidence) && !$evidence->status) || old('status') == '0' ? 'selected' : '' }}>Inactive</option>
+                                                <option value="1" {{ (isset($evidence) && $evidence->status) || old('status') == '1' ? 'selected' : '' }}>Activo</option>
+                                                <option value="0" {{ (isset($evidence) && !$evidence->status) || old('status') == '0' ? 'selected' : '' }}>Inactivo</option>
                                             </select>
                                             @error('status')
                                                 <span class="invalid-feedback">{{ $message }}</span>
@@ -279,10 +279,10 @@
 
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">
-                                        {{ isset($evidence) ? 'Update Evidence' : 'Add Evidence' }}
+                                        {{ isset($evidence) ? 'Actualizar evidencia' : 'Agregar evidencia' }}
                                     </button>
                                     <a href="{{ route('evidences.index') }}" class="btn btn-default">
-                                        Cancel
+                                        Cancelar
                                     </a>
                                 </div>
                             </form>

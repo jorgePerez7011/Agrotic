@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Evidence List')
+@section('title', 'Lista de evidencias')
 
 @section('content')
     <!-- Google Maps Modal -->
@@ -8,7 +8,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header" style="background: linear-gradient(to right, #2E7D32, #4CAF50);">
-                    <h5 class="modal-title text-white" id="locationModalLabel">Location Details</h5>
+                    <h5 class="modal-title text-white" id="locationModalLabel">Detalles de ubicación</h5>
                     <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -128,12 +128,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="text-dark">Evidence List</h1>
+                        <h1 class="text-dark">Lista de evidencias</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ route('home') }}" style="color: #2E7D32;">Home</a></li>
-                            <li class="breadcrumb-item active">Evidence</li>
+                            <li class="breadcrumb-item"><a href="{{ route('home') }}" style="color: #2E7D32;">Inicio</a></li>
+                            <li class="breadcrumb-item active">Evidencias</li>
                         </ol>
                     </div>
                 </div>
@@ -147,7 +147,7 @@
                     <div class="col-12">
                         <div class="card" style="background-color: #f5fff8; border: 1px solid #cce3d2;">
                             <div class="card-header">
-                                <h3 class="card-title text-lg">Evidence Records</h3>
+                                <h3 class="card-title text-lg">Registros de evidencias</h3>
                                 <div class="card-tools">
                                     <a href="{{ route('evidences.create') }}" class="btn btn-primary float-right mr-2">
                                         <i class="fas fa-plus nav-icon"></i>
@@ -163,8 +163,8 @@
                                     <table id="evidence-table" class="table table-bordered table-hover">
                                         <thead class="text-primary">
                                             <tr>
-                                                <th>Date</th>
-                                                <th>Photo</th>
+                                                <th>Fecha</th>
+                                                <th>Foto</th>
                                                 <th>Cultivo</th>
                                                 <th>Área total (m²)</th>
                                                 <th>Área cultivable (m²)</th>
@@ -178,8 +178,8 @@
                                                 <th>Consideraciones adicionales</th>
                                                 <th>Resumen</th>
                                                 <th>Inversión estimada</th>
-                                                <th>Status</th>
-                                                <th>Actions</th>
+                                                <th>Estado</th>
+                                                <th>Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -188,7 +188,7 @@
                                                 <td>{{ $evidence->date->format('Y-m-d H:i:s') }}</td>
                                                 <td>
                                                     <img src="{{ Storage::url($evidence->photo) }}" 
-                                                         alt="Evidence Photo" 
+                                                         alt="Foto de evidencia" 
                                                          class="img-thumbnail shadow-sm"
                                                          style="max-width: 100px; cursor: pointer"
                                                          onclick="window.open(this.src, '_blank')">
@@ -287,14 +287,14 @@
                                                             style="{{ $evidence->status ? 'background-color: #4CAF50; color: white;' : 'background-color: #dc3545; color: white;' }}"
                                                             data-id="{{ $evidence->id }}">
                                                         <i class="fas fa-{{ $evidence->status ? 'check-circle' : 'times-circle' }} mr-1"></i>
-                                                        {{ $evidence->status ? 'Active' : 'Inactive' }}
+                                                        {{ $evidence->status ? 'Activo' : 'Inactivo' }}
                                                     </button>
                                                 </td>
                                                 <td>
                                                     <div class="btn-group">
                                                         <a href="{{ route('evidences.edit', $evidence) }}" 
                                                            class="btn btn-primary btn-sm"
-                                                           title="Edit Evidence">
+                                                           title="Editar evidencia">
                                                             <i class="fas fa-edit"></i>
                                                         </a>
                                                         <form action="{{ route('evidences.destroy', $evidence) }}" 
@@ -302,7 +302,7 @@
                                                               class="d-inline delete-form">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-sm btn-danger" title="Delete Evidence">
+                                                            <button type="submit" class="btn btn-sm btn-danger" title="Eliminar evidencia">
                                                                 <i class="fas fa-trash"></i>
                                                             </button>
                                                         </form>
@@ -331,11 +331,11 @@
             "autoWidth": false,
             "pageLength": 10,
             "language": {
-                "lengthMenu": "Show _MENU_ entries per page",
-                "zeroRecords": "No evidence found",
-                "info": "Showing page _PAGE_ of _PAGES_",
-                "infoEmpty": "No evidence available",
-                "infoFiltered": "(filtered from _MAX_ total records)"
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "zeroRecords": "No se encontraron evidencias",
+                "info": "Mostrando página _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay evidencias disponibles",
+                "infoFiltered": "(filtrado de _MAX_ registros en total)"
             },
             "dom": "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
                   "<'row'<'col-sm-12'tr>>" +
@@ -343,7 +343,7 @@
             "buttons": [
                 {
                     extend: 'collection',
-                    text: '<i class="fas fa-download"></i> Export',
+                    text: '<i class="fas fa-download"></i> Exportar',
                     className: 'btn-success',
                     buttons: [
                         {
@@ -370,7 +370,7 @@
                 },
                 {
                     extend: 'colvis',
-                    text: '<i class="fas fa-columns"></i> Columns',
+                    text: '<i class="fas fa-columns"></i> Columnas',
                     className: 'btn-success'
                 }
             ]

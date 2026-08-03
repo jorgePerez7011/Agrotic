@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'List of loans')
+@section('title', 'Lista de préstamos')
 
 @section('content')
     <style>
@@ -75,12 +75,12 @@
                                     <thead class="text-primary">
                                         <tr>
                                             <th>ID</th>
-                                            <th>User Name</th>
-                                            <th>User Document</th>
-                                            <th>Date</th>
+                                            <th>Nombre del usuario</th>
+                                            <th>Documento del usuario</th>
+                                            <th>Fecha</th>
                                             <th>Total</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
+                                            <th>Estado</th>
+                                            <th>Acción</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -101,11 +101,11 @@
 
                                                 <td>
                                                     <a href="{{ route('orders.show', $order) }}"
-                                                        class="btn btn-primary btn-sm" title="View bill">
+                                                        class="btn btn-primary btn-sm" title="Ver préstamo">
                                                         <i class="fa-solid fa-eye"></i>
                                                     </a>
-                                                    <a href="{{ $order->route }}" class="btn btn-primary btn-sm"
-                                                        title="Download bill">
+                                                    <a href="{{ route('orders.download', $order) }}" class="btn btn-primary btn-sm"
+                                                        title="Descargar comprobante">
                                                         <i class="fa-solid fa-file-pdf"></i>
                                                     </a>
                                                     <form class="d-inline delete-form"
@@ -113,7 +113,7 @@
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class=" btn btn-danger btn-sm"
-                                                            title="Delete">
+                                                            title="Eliminar">
                                                             <i class="fas fa-trash-alt"></i>
                                                         </button>
                                                     </form>
